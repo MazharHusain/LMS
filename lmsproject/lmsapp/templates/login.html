@@ -1,13 +1,15 @@
 {% extends "parent.html" %}
 {% block main %}
+
 {% if messages %}
    {% for message in messages %}
      <div class="alert alert-warning alert-dismissible fade show" role="alert">
       <strong>{{message}}</strong>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
      </div>
-    {% endfor %}
-   {% endif %}
+   {% endfor %}
+{% endif %}
+
 <script>
     function validate()
     {
@@ -29,37 +31,88 @@
         }
     }
 </script>
-<h2 style="text-align: center;">Login Form</h2>
-<form class="form-group" id="frmlogin" method="post" onsubmit="event.preventDefault();validate();" action="{% url 'lmsapp:login' %}">
-    {% csrf_token %}
-    <table class="table" style="margin: auto; width: 80%;">
-         <tr>
-            <td>Enter UserId/Roll No.</td>
-            <td>
-                <input type="text" name="userid" class="form-control" id="userid"/>
-            </td>
-         </tr>
-         <tr>
-            <td>Enter Password</td>
-            <td>
-                <input type="password" name="password" class="form-control" id="password"/>
-            </td>
-        </tr>
-        <tr>
-            <td>Select User Type</td>
-            <td>
-                <select name="usertype" class="form-control">
-                <option selected>-Select Usertype</option>
-                <option value="student">Student</option>
-                <option value="admin">Admin</option>
-                </select>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <button type="submit" class="btn btn-success">Login</button>
-            </td>
-        </tr>
-    </table>
+
+<style>
+.login-card {
+    max-width: 600px;
+    margin: 70px auto;
+    padding: 40px;
+    border-radius: 15px;
+    background: rgb(200, 194, 201);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.login-title {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #8B0000;
+}
+
+.form-label {
+    font-weight: 600;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #8B0000;
+    box-shadow: 0 0 0 0.2rem rgba(139,0,0,0.15);
+}
+
+.btn-login {
+    background: linear-gradient(90deg,#8B0000,#B22222);
+    border: none;
+    padding: 10px 35px;
+    font-weight: 600;
+    border-radius: 8px;
+    color: white;
+}
+
+.btn-login:hover {
+    opacity: 0.9;
+}
+</style>
+
+<div class="login-card">
+
+<h2 class="login-title">Login Form</h2>
+
+<form id="frmlogin" method="post"
+      onsubmit="event.preventDefault();validate();"
+      action="{% url 'lmsapp:login' %}">
+
+{% csrf_token %}
+
+<div class="mb-3">
+<label class="form-label">UserId / Roll No</label>
+<input type="text" name="userid" id="userid" class="form-control">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Password</label>
+<input type="password" name="password" id="password" class="form-control">
+</div>
+
+<div class="mb-4">
+<label class="form-label">User Type</label>
+<select name="usertype" class="form-select">
+<option selected>-Select Usertype</option>
+<option value="student">Student</option>
+<option value="admin">Admin</option>
+</select>
+</div>
+
+<div class="text-center">
+<button type="submit" class="btn btn-login">
+Login
+</button>
+</div>
+
 </form>
+</div>
+
 {% endblock main %}

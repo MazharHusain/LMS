@@ -3,157 +3,195 @@
 {% load static %}
 
 <style>
-    /* --- Leadership Card Styling --- */
-    .leader-card { 
-        transition: transform 0.3s ease; 
-        border: none; 
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        overflow: hidden;
-    }
-    
-    .leader-card:hover { 
-        transform: translateY(-8px); 
-    }
+.leader-card {
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.leader-card:hover {
+    transform: translateY(-8px);
+}
+.leader-img {
+    width: 100%;
+    height: 380px;
+    object-fit: contain;
+    margin: 20px auto;
+    background-color: rgb(234, 231, 231);
+}
 
-    /* Fixed height for all three images to ensure perfect alignment */
-    .leader-img {
-        height: 450px; 
-        width: 100%;
-        object-fit: cover;
-        object-position: top center; /* Keeps faces in frame when cropping */
-    }
 
-    /* --- The "Unstoppable" Notice Board --- */
-    .notice-container {
-        height: 450px; 
-        overflow: hidden;
-        position: relative;
-        background: #1a252f; 
-        padding: 10px 15px;
-    }
+.notice-container {
+    height: 420px;
+    overflow: hidden;
+    position: relative;
+    background: #1a252f;
+    padding: 15px;
+}
 
-    .scrolling-list {
-        position: absolute;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        animation: scrollUpUnstoppable 40s linear infinite; 
-    }
+.scrolling-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    animation: scrollUp 40s linear infinite;
+}
 
-    @keyframes scrollUpUnstoppable {
-        0% { transform: translateY(100%); }
-        100% { transform: translateY(-100%); }
-    }
+.scrolling-list li {
+    margin-bottom: 20px;
+}
 
-    .notice-link {
-        color: #ffc107; 
-        text-decoration: none;
-        display: block;
-        margin-bottom: 18px;
-        font-size: 0.9rem;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        padding-bottom: 10px;
-        line-height: 1.4;
-    }
+@keyframes scrollUp {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
+}
 
-    .notice-link:hover { color: #ffffff; }
-    .new-badge { height: 14px; vertical-align: middle; margin-left: 5px; }
-    .category-label { font-size: 0.7rem; text-transform: uppercase; color: #00d4ff; display: block; margin-bottom: 2px; }
+.notice-link {
+    color: #ffc107;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 8px;
+    transition: 0.3s;
+}
 
-    /* --- Campus Image Styling --- */
-    .main-campus-img { 
-        width: 100%; 
-        height: 100%; 
-        object-fit: cover; 
-        min-height: 600px; /* Reduced slightly for better balance on laptops */
-    }
+.notice-link:hover { color: white; }
+
+.category-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #00d4ff;
+    margin-bottom: 3px;
+}
+
+.new-badge {
+    height: 14px;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
+.main-campus-img {
+    width: 100%;
+    min-height: 550px;
+    object-fit: cover;
+}
 </style>
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-5">
     <div class="row g-4 mb-5">
+
         <div class="col-lg-4">
-            <div class="card h-100 leader-card text-center">
-                <img src="{% static 'images/vc1.jpg' %}" class="card-img-top leader-img" alt="Chancellor">
-                <div class="card-body bg-white">
-                    <h5 class="fw-bold text-danger mb-1">Chancellor</h5>
-                    <p class="small text-muted mb-0">Shri Rajendra Vishwanath Arlekar</p>
+            <div class="card leader-card text-center">
+                <img src="{% static 'images/vc1.jpg' %}" class="leader-img">
+                <div class="card-body">
+                    <h5 class="text-danger fw-bold">Chancellor</h5>
+                    <p class="small">Shri Rajendra Vishwanath Arlekar</p>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-lg-4">
-            <div class="card h-100 leader-card text-center">
-                <img src="{% static 'images/vcII.jpg' %}" class="card-img-top leader-img" alt="Vice Chancellor">
-                <div class="card-body bg-white">
-                    <h5 class="fw-bold text-danger mb-1">Vice Chancellor</h5>
-                    <p class="small text-muted mb-0">Prof. (Dr.) Jawahar Lal</p>
+            <div class="card leader-card text-center">
+                <img src="{% static 'images/vcII.jpg' %}" class="leader-img">
+                <div class="card-body">
+                    <h5 class="text-danger fw-bold">Vice Chancellor</h5>
+                    <p class="small">Prof. (Dr.) Jawahar Lal</p>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-lg-4">
-            <div class="card h-100 leader-card text-center">
-                <img src="{% static 'images/vc2.jpg' %}" class="card-img-top leader-img" alt="Pro Vice Chancellor">
-                <div class="card-body bg-white">
-                    <h5 class="fw-bold text-danger mb-1">Pro Vice Chancellor</h5>
-                    <p class="small text-muted mb-0">Prof. Ramesh Kumar</p>
+            <div class="card leader-card text-center">
+                <img src="{% static 'images/vc2.jpg' %}" class="leader-img">
+                <div class="card-body">
+                    <h5 class="text-danger fw-bold">Pro Vice Chancellor</h5>
+                    <p class="small">Prof. Ramesh Kumar</p>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div class="row g-0 shadow-lg rounded overflow-hidden">
+    <div class="row shadow rounded overflow-hidden">
+
+        
         <div class="col-lg-4 d-flex flex-column">
-            <div class="p-3 bg-dark border-bottom border-warning">
-                <h2 class="h5 text-warning text-center mb-0 fw-bold">Important Notices</h2>
-            </div>
-            
-            <div class="notice-container flex-grow-1">
-                <div class="scrolling-list">
-                    <a href="#" class="notice-link">
-                        <span class="category-label">Events</span>
-                        <i class="fa fa-caret-right"></i> Silver Jubilee Celebrations (VC Keynote Speech)...
-                        <img src="{% static 'images/new.gif' %}" class="new-badge">
-                    </a>
-                    <a href="#" class="notice-link">
-                        <span class="category-label">Examination</span>
-                        <i class="fa fa-caret-right"></i> Results Declared: B.A./B.Sc./B.Com Part-III (2021-24)...
-                        <img src="{% static 'images/new.gif' %}" class="new-badge">
-                    </a>
-                    <a href="#" class="notice-link">
-                        <span class="category-label">Ph.D. Cell</span>
-                        <i class="fa fa-caret-right"></i> Schedule for PAT-2024 Viva-Voce (Science Faculty)...
-                    </a>
-                    <a href="#" class="notice-link">
-                        <span class="category-label">Administration</span>
-                        <i class="fa fa-caret-right"></i> Notification regarding Internal Complaints Committee...
-                    </a>
-                    <a href="#" class="notice-link">
-                        <span class="category-label">Tenders</span>
-                        <i class="fa fa-caret-right"></i> E-Tender for University Wi-Fi Campus Infrastructure...
-                        <img src="{% static 'images/new.gif' %}" class="new-badge">
-                    </a>
-                    <a href="#" class="notice-link">
-                        <span class="category-label">Recruitment</span>
-                        <i class="fa fa-caret-right"></i> Guest Faculty Interview Schedule for Dept. of Physics...
-                    </a>
-                </div>
+            <div class="bg-dark text-warning text-center p-3 fw-bold">
+                Important Notices
             </div>
 
-            <div class="p-4 bg-warning">
-                <h6 class="fw-bold text-dark mb-1">Admission 2026 Details</h6>
-                <p class="small text-dark mb-0">
-                    The last date for application has been extended to <strong>15th February 2026</strong>. 
-                    <br><br>
-                    <strong>Eligibility:</strong> Students must have passed 10th and 12th from a recognized board.
+            <div class="notice-container flex-grow-1">
+                <ul class="scrolling-list">
+
+                    <li>
+                        <a href="#" class="notice-link">
+                            <span class="category-label">Events</span>
+                            <i class="fa fa-caret-right"></i>
+                            Silver Jubilee Celebrations (VC Keynote Speech)...
+                            <img src="{% static 'images/new.gif' %}" class="new-badge">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="notice-link">
+                            <span class="category-label">Examination</span>
+                            <i class="fa fa-caret-right"></i>
+                            Results Declared: B.A./B.Sc./B.Com Part-III (2021-24)...
+                            <img src="{% static 'images/new.gif' %}" class="new-badge">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="notice-link">
+                            <span class="category-label">Ph.D. Cell</span>
+                            <i class="fa fa-caret-right"></i>
+                            Schedule for PAT-2024 Viva-Voce (Science Faculty)...
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="notice-link">
+                            <span class="category-label">Administration</span>
+                            <i class="fa fa-caret-right"></i>
+                            Notification regarding Internal Complaints Committee...
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="notice-link">
+                            <span class="category-label">Tenders</span>
+                            <i class="fa fa-caret-right"></i>
+                            E-Tender for University Wi-Fi Campus Infrastructure...
+                            <img src="{% static 'images/new.gif' %}" class="new-badge">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="notice-link">
+                            <span class="category-label">Recruitment</span>
+                            <i class="fa fa-caret-right"></i>
+                            Guest Faculty Interview Schedule for Dept. of Physics...
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="bg-warning p-4">
+                <h6 class="fw-bold text-dark">Admission 2026 Details</h6>
+                <p class="small text-dark">
+                    Last date: <strong>15th February 2026</strong><br><br>
+                    Eligibility: 10th & 12th Passed
                 </p>
             </div>
         </div>
 
         <div class="col-lg-8">
-            <img src="{% static 'images/imag.jpg' %}" class="main-campus-img" alt="University Main Building">
+            <img src="{% static 'images/imag.jpg' %}" class="main-campus-img">
         </div>
+
     </div>
 </div>
 

@@ -1,13 +1,15 @@
 {% extends "parent.html" %}
 {% block main %}
+
 {% if messages %}
    {% for message in messages %}
      <div class="alert alert-warning alert-dismissible fade show" role="alert">
       <strong>{{message}}</strong>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
      </div>
-    {% endfor %}
-   {% endif %}
+   {% endfor %}
+{% endif %}
+
 <script>
     function validate()
     {
@@ -102,117 +104,165 @@
     }
     }
 </script>
-<h2 style="text-align: center;">Student Registration Form</h2>
-<form id="frmregistration" method="post" onsubmit="event.preventDefault();validate();"  class="form-group" action="{% url 'lmsapp:registration' %}">
-    {% csrf_token %}
-    <table class="table" style="margin: auto; width: 80%;">
-       <tr>
-           <td>Enter Roll No.</td>
-           <td>
-               <input type="number" name="rollno" class="form-control" id="rollno"/>
-           </td>
-       </tr>
-       <tr>
-           <td>Enter Name</td>
-           <td>
-               <input type="text" name="name" class="form-control" id="name">
-           </td>
-       </tr>
-       <tr>
-        <td>Enter Father Name</td>
-        <td>
-            <input type="text" name="fname" class="form-control" id="fname">
-        </td>
-    </tr>
-    <tr>
-        <td>Enter Mother Name</td>
-        <td>
-            <input type="text" name="mname" class="form-control" id="mname">
-        </td>
-    </tr>
-    <tr>
-        <td>Select Gender</td>
-        <td>
-            <input type="radio" name="gender" value="Male" class="form-check-input"/>Male &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-            <input type="radio" name="gender" value="Female" class="form-check-input"/>Female
-        </td>
-    </tr>
-    <tr>
-        <td>Enter Your Address</td>
-               <td><textarea name="address" class="form-control"></textarea></td>
-        </td>
-    </tr>
-    <tr>
-        <td> Select Program</td>
-        <td>
-            <select name="program" class="form-control">
-                <option selected>-select program</option>
-                {% for p in program %}
-                    <option value="{{p.program}}">{{p.program}}</option>
-                {% endfor %}
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>Select Branch</td>
-        <td>
-            <select name="branch" class="form-control">
-            <option selected>-select Branch</option>
-            {% for b in branch %}
-                 <option value="{{b.branch}}">{{b.branch}}</option>
-            {% endfor %}
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>Select Year</td>
-        <td>
-            <select name="year" class="form-control">
-            <option selected>-Select Year</option>
-            {% for y in year %}
-                 <option value="{{y.year}}">{{y.year}}</option>
-            {% endfor %}
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>Enter Contact No.</td>
-        <td>
-            <input type="number" name="contactno" class="form-control" id="contactno"/>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Enter Email Address
-        </td>
-        <td>
-            <input type="text" name="emailaddress" class="form-control" id="emailaddress"/>
-        </td>
-    </tr>
-    <tr>
-        <td>Enter Password</td>
-        <td>
-            <input type="password" name="password" class="form-control" id="password"/>
-        </td>
-    </tr>
-    <tr>
-        <td>Confirm Password</td>
-        <td>
-            <input type="password" name="confirmpassword" class="form-control" id="confirmpassword"/>
-        </td>
-    </tr>
-    <!-- <tr>
-        <td>Registration Date</td>
-        <td>
-            <input type="date" >
-        </td>
-    </tr> -->
-    <tr>
-        <td>&nbsp;</td>
-        <td>
-            <button type="submit" class="btn btn-success">Register</button>
-        </td>
-    </tr>
-    </table>
+
+<style>
+.registration-card {
+    max-width: 950px;
+    margin: 50px auto;
+    padding: 40px;
+    border-radius: 15px;
+    background:  rgb(200, 194, 201);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.registration-title {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #8B0000;
+}
+
+.form-label {
+    font-weight: 600;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #8B0000;
+    box-shadow: 0 0 0 0.2rem rgba(139,0,0,0.15);
+}
+
+.gender-group {
+    display: flex;
+    gap: 30px;
+    padding-top: 8px;
+}
+
+.btn-register {
+    background: linear-gradient(90deg,#8B0000,#B22222);
+    border: none;
+    padding: 10px 35px;
+    font-weight: 600;
+    border-radius: 8px;
+    color: white;
+}
+
+.btn-register:hover {
+    opacity: 0.9;
+}
+</style>
+
+<div class="registration-card">
+
+<h2 class="registration-title">Student Registration Form</h2>
+
+<form id="frmregistration" method="post"
+      onsubmit="event.preventDefault();validate();"
+      action="{% url 'lmsapp:registration' %}">
+
+{% csrf_token %}
+
+<div class="row g-3">
+
+<div class="col-md-6">
+<label class="form-label">Roll No</label>
+<input type="number" name="rollno" id="rollno" class="form-control">
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Full Name</label>
+<input type="text" name="name" id="name" class="form-control">
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Father Name</label>
+<input type="text" name="fname" id="fname" class="form-control">
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Mother Name</label>
+<input type="text" name="mname" id="mname" class="form-control">
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Gender</label>
+<div class="gender-group">
+<div class="form-check">
+<input type="radio" name="gender" value="Male" class="form-check-input"> Male
+</div>
+<div class="form-check">
+<input type="radio" name="gender" value="Female" class="form-check-input"> Female
+</div>
+</div>
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Contact No</label>
+<input type="number" name="contactno" id="contactno" class="form-control">
+</div>
+
+<div class="col-12">
+<label class="form-label">Address</label>
+<textarea name="address" class="form-control" rows="3"></textarea>
+</div>
+
+<div class="col-md-4">
+<label class="form-label">Program</label>
+<select name="program" class="form-select">
+<option selected>-select program</option>
+{% for p in program %}
+<option value="{{p.program}}">{{p.program}}</option>
+{% endfor %}
+</select>
+</div>
+
+<div class="col-md-4">
+<label class="form-label">Branch</label>
+<select name="branch" class="form-select">
+<option selected>-select Branch</option>
+{% for b in branch %}
+<option value="{{b.branch}}">{{b.branch}}</option>
+{% endfor %}
+</select>
+</div>
+
+<div class="col-md-4">
+<label class="form-label">Year</label>
+<select name="year" class="form-select">
+<option selected>-Select Year</option>
+{% for y in year %}
+<option value="{{y.year}}">{{y.year}}</option>
+{% endfor %}
+</select>
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Email Address</label>
+<input type="text" name="emailaddress" id="emailaddress" class="form-control">
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Password</label>
+<input type="password" name="password" id="password" class="form-control">
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Confirm Password</label>
+<input type="password" name="confirmpassword" id="confirmpassword" class="form-control">
+</div>
+
+<div class="col-12 text-center mt-4">
+<button type="submit" class="btn btn-register">
+Register
+</button>
+</div>
+
+</div>
 </form>
+</div>
+
 {% endblock main %}
